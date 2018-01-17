@@ -14,6 +14,15 @@ namespace Grades
     {
         static void Main(string[] args)
         {
+            /* Move to Types.ReferenceTypeTests.cs
+            GradeBook g1 = new GradeBook();
+            GradeBook g2 = g1;
+            g1 = new GradeBook();
+            g1.Name = "Someone's grade book.";
+            */
+           //Console.WriteLine(g2.Name);
+            
+          
             //Instantiate Speech Synthesizer
             SpeechSynthesizer synth = new SpeechSynthesizer();
             //What to have system speek
@@ -32,6 +41,7 @@ namespace Grades
             Console.WriteLine(stats.LowestGrade);
             // GradeBook book2 = book;
             //book2.AddGrade(75);
+        
         }
     }
 }
