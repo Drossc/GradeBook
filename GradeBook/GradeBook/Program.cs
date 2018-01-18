@@ -14,34 +14,40 @@ namespace Grades
     {
         static void Main(string[] args)
         {
-            /* Move to Types.ReferenceTypeTests.cs
-            GradeBook g1 = new GradeBook();
-            GradeBook g2 = g1;
-            g1 = new GradeBook();
-            g1.Name = "Someone's grade book.";
-            */
-           //Console.WriteLine(g2.Name);
-            
-          
-            //Instantiate Speech Synthesizer
-            SpeechSynthesizer synth = new SpeechSynthesizer();
-            //What to have system speek
-            synth.Speak("Hello! This is the grade book program");
-
             GradeBook book = new GradeBook();
             book.AddGrade(91);
             book.AddGrade(89.5f);
             book.AddGrade(75);
 
-            //GradeBook book2 = new GradeBook();
+            GradeStatistics stats = book.ComputeStatistics(); 
+            //Console.WriteLine(stats.AverageGrade);
+            WriteResult("Average", stats.AverageGrade);
+            //Console.WriteLine(stats.HighestGrade);
+            WriteResult("Highest", (int)stats.HighestGrade);
+            //Console.WriteLine(stats.LowestGrade);
+            WriteResult("Lowest", stats.LowestGrade);
+        }
 
-            GradeStatistics stats = book.ComputeStatistics();
-            Console.WriteLine(stats.AverageGrade);
-            Console.WriteLine(stats.HighestGrade);
-            Console.WriteLine(stats.LowestGrade);
-            // GradeBook book2 = book;
-            //book2.AddGrade(75);
-        
+        //These are examples of helper methods (Method Overloading)
+        //Use different signatures due to type of result 
+        //VS can use smart logic to determine which one, usually
+        static void WriteResult(string description, int result)
+        {
+            Console.WriteLine(description + ": " + result);
+        }
+
+        static void WriteResult(string description, float result)
+        {
+            //Both can do a similar result but may be easier to understand 
+            //the expected output based on writing
+            //Console.WriteLine(description + ": " + result);
+            //Console.WriteLine("{0}: {1:F2}", description, result);
+
+            //Formats the result as a float with two decimal places and rounds
+            //Console.WriteLine("{0}: {1:F2}", description, result);
+
+            //Formats the result as a currency
+            Console.WriteLine("{0}: {1:C}", description, result);
         }
     }
 }
