@@ -10,6 +10,7 @@ namespace Grades
     {
         public GradeBook()
         {
+            _name = "Empty";
             grades = new List<float>();
         }
 
@@ -20,11 +21,6 @@ namespace Grades
             float sum = 0;
             foreach (float grade in grades)
             {
-                //sum = sum + grade; same as below
-                /*if (grade > stats.HighestGrade)
-                {
-                    stats.HighestGrade = grade;
-                }*/
                 stats.HighestGrade = Math.Max(grade, stats.HighestGrade);
                 stats.LowestGrade = Math.Min(grade, stats.LowestGrade);
                 sum += grade;
@@ -38,8 +34,33 @@ namespace Grades
         {
             grades.Add(grade);
         }
-        public string Name;
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
 
+            set
+            {
+                if (!String.IsNullOrEmpty(value)) 
+                {
+                    if (_name != value)
+                    {
+                        NameChangedEventArgs args = new NameChangedEventArgs();
+                        args.ExistingName = _name;
+                        args.NewName = value;
+
+                        NameChanged(this, args);
+                    }
+
+                    _name = value;
+                }
+            }
+        }
+
+        public event NameChangeDelegate NameChanged;
+        private string _name;
         private List<float> grades;
     }
 }
